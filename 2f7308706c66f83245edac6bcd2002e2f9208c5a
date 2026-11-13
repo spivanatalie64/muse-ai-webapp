@@ -1,0 +1,14 @@
+Why: Muse (muse.ai) exposes no public consumer API and its chat runs over a private
+WebSocket (wss://edge-chat.meta.ai), so the only honest way to use it programmatically
+is to drive the real web UI in a real browser. The backend is therefore Firefox/Gecko
+(system Firefox 159.0.1) via geckodriver 0.37.1 (W3C WebDriver) with a minimal in-house
+client — no Chromium-bundled automation framework.
+
+Key choices grounded in verification:
+- geckodriver 0.37.1 rejects moz:firefoxOptions.profile ("Invalid padding"), so the
+  profile is passed as a -profile arg (cookie persistence across restarts confirmed for
+  cookies with real expiry). Login is interactive/headed once; session lives in profile.
+- Replies are extracted by polling the rendered transcript DOM (private protocol not
+  observable) and streamed as deltas; prompt-echo and previous-turn leaks are guarded.
+- Selectors are ordered/fallback and env-overridable because Muse ships markup changes.
+Verified: pnpm gecko:check (E2E against fixture), pnpm check (tsc, 10/10 vitest, next build).
