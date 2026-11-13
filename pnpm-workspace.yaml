@@ -1,0 +1,4 @@
+# esbuild ships a prebuilt binary but still runs a postinstall script to place it.
+# Vitest cannot transform TypeScript without it, so the build is explicitly allowed.
+allowBuilds:
+  esbuild: true
