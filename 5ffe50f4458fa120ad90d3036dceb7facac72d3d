@@ -1,0 +1,1 @@
+Why: provide an Arch Linux package so muse-ai-webapp can be installed via pacman/makepkg. Uses Next.js standalone output to bundle server+traced deps; installs to /usr/share/muse-ai-webapp with a /usr/bin launcher. Declares nodejs, firefox, geckodriver runtime deps. Profile/session remains per-user (MUSE_PROFILE_DIR). Verified standalone build serves 200.
