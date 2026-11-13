@@ -1,0 +1,18 @@
+pkgbase = muse-ai-webapp
+	pkgdesc = Web app for Meta's Muse driven through a Firefox/Gecko (geckodriver) backend
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/spivanatalie64/muse-ai-webapp
+	arch = x86_64
+	license = MIT
+	makedepends = pnpm
+	makedepends = git
+	depends = nodejs
+	depends = firefox
+	depends = geckodriver
+	options = !strip
+	options = !debug
+	source = git+https://github.com/spivanatalie64/muse-ai-webapp.git#commit=HEAD
+	sha256sums = SKIP
+
+pkgname = muse-ai-webapp
