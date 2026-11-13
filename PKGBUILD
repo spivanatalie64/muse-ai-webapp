@@ -1,6 +1,6 @@
 # Maintainer: Natalie Spiva <natalie@acreetionos.org>
 pkgname=muse-ai-webapp
-pkgver=0.1.0
+pkgver=0.1.0.r3.g5ffe50f
 pkgrel=1
 pkgdesc="Web app for Meta's Muse driven through a Firefox/Gecko (geckodriver) backend"
 arch=('x86_64')
@@ -10,7 +10,12 @@ depends=('nodejs' 'firefox' 'geckodriver')
 makedepends=('pnpm' 'git')
 # Profile/session data is stored per-user (MUSE_PROFILE_DIR), not in the package.
 options=('!strip' '!debug')
-source=("git+${url}.git#commit=HEAD")
+# #commit=HEAD resolves the repo's *default* branch (features/gecko-backend),
+# which lags the packaging changes (output: standalone, LICENSE) until PR #4
+# merges. Pin to the branch this PKGBUILD ships on so the package is buildable
+# from this branch; flip back to #commit=HEAD (or a tag) once merged.
+_source_branch='build/arch-package'
+source=("git+${url}.git#branch=${_source_branch}")
 sha256sums=('SKIP')
 
 pkgver() {
